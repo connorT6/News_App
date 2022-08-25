@@ -7,5 +7,6 @@ import com.connort6.newsapp.data.Article
 data class News(
     val articles: List<Article>,
     val status: String,
-    val totalResults: Int
+    val totalResults: Int,
+    val message: String?
 )

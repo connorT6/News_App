@@ -19,7 +19,7 @@ object ApplicationModule {
     @Singleton
     fun provideNewsApi() : NewsApi {
         return Retrofit.Builder()
-            .baseUrl("https://newsapi.org/v2/")
+            .baseUrl("https://newsapi.org/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(NewsApi::class.java)
