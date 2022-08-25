@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.connort6.newsapp.data.News
-import com.connort6.newsapp.other.Constants
 import com.connort6.newsapp.other.ResponseWrapper
 import com.connort6.newsapp.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +20,7 @@ class MainViewModel @Inject constructor(
     private var breakingNewsPage = 1
     private var prevBreakingNewsCountry = "us"
     private var breakingNews: ResponseWrapper? = null
+    private var breakingNewsCat: String? = null
 
     val searchNewsML: MutableLiveData<ResponseWrapper> = MutableLiveData()
     val topNewsML: MutableLiveData<ResponseWrapper> = MutableLiveData()
@@ -33,20 +33,26 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getBreakingNews(countryCode: String = "us") {
-        if (prevBreakingNewsCountry != countryCode){
+    fun getBreakingNews(countryCode: String = "us", category: String? = null) {
+        if (prevBreakingNewsCountry != countryCode) {
             breakingNewsPage = 1
             breakingNews = null
             prevBreakingNewsCountry = countryCode
         }
+        if (breakingNewsCat != category){
+            breakingNewsPage = 1
+            breakingNews = null
+            breakingNewsCat = category
+        }
+
         viewModelScope.launch {
             breakingNewsML.postValue(ResponseWrapper())
             try {
-                val res = mainRepository.getBreakingNews(countryCode, breakingNewsPage)
+                val res = mainRepository.getBreakingNews(countryCode, breakingNewsPage, category)
                 val data = processResponse(res, breakingNews)
                 breakingNews = data
                 breakingNewsML.postValue(data)
-            }catch (t: Throwable){
+            } catch (t: Throwable) {
 
             }
 
@@ -61,7 +67,7 @@ class MainViewModel @Inject constructor(
                 val data = processResponse(res, topNews)
                 topNews = data
                 searchNewsML.postValue(data)
-            }catch (t:Throwable){
+            } catch (t: Throwable) {
 
             }
 

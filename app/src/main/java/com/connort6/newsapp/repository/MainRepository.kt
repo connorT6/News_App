@@ -8,8 +8,8 @@ class MainRepository(
     private val newsApi: NewsApi
 ) {
 
-    suspend fun getBreakingNews(countryCode: String, pageNumber: Int) =
-        newsApi.getBreakingNews(countryCode = countryCode, pageNo = pageNumber)
+    suspend fun getBreakingNews(countryCode: String, pageNumber: Int, category: String? = null) =
+        newsApi.getBreakingNews(countryCode = countryCode, pageNo = pageNumber, category = category)
 
     suspend fun searchNews(keyword: String) =
         newsApi.searchAllNews(keyword = keyword)

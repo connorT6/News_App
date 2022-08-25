@@ -16,6 +16,7 @@ import com.connort6.newsapp.R
 import com.connort6.newsapp.adapters.NewsRecViewAdapter
 import com.connort6.newsapp.databinding.BottomSheetFilterBinding
 import com.connort6.newsapp.databinding.FragmentBreakingNewsBinding
+import com.connort6.newsapp.other.Constants.Companion.categoryList
 import com.connort6.newsapp.other.Constants.Companion.countryMap
 import com.connort6.newsapp.other.ResponseWrapper
 import com.connort6.newsapp.ui.viewmodels.MainViewModel
@@ -30,6 +31,7 @@ class BreakingNewsFragment : Fragment() {
     private lateinit var binding: FragmentBreakingNewsBinding
     private var countryChanged: Boolean = false
     private var countryCode: String = "us"
+    private var currentCategory: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,8 +63,13 @@ class BreakingNewsFragment : Fragment() {
             val bottomSheetBinding = BottomSheetFilterBinding.inflate(layoutInflater)
             val currentCountryName = countryMap.filterValues { it == countryCode }.keys.first()
             val tvCountry = bottomSheetBinding.tvAutoCountry
+            val tvCategory = bottomSheetBinding.tvAutoCategory
             tvCountry.text =
-                Editable.Factory.getInstance().newEditable(currentCountryName.toString())
+                Editable.Factory.getInstance().newEditable(currentCountryName)
+            if (currentCategory != null) {
+                tvCategory.text = Editable.Factory.getInstance().newEditable(currentCategory)
+            }
+
             val countryAdapter = ArrayAdapter(
                 requireActivity(),
                 R.layout.item_filter_method,
@@ -73,10 +80,33 @@ class BreakingNewsFragment : Fragment() {
             tvCountry.setOnItemClickListener { _, _, position, _ ->
                 val selection = countryList[position]
                 countryCode = countryMap[selection]!!
-                mainViewModel.getBreakingNews(countryCode = countryCode)
+                mainViewModel.getBreakingNews(countryCode = countryCode, currentCategory)
                 countryChanged = true
                 dialog.dismiss()
             }
+
+            val categoryAdapter = ArrayAdapter(
+                requireActivity(),
+                R.layout.item_filter_method,
+                R.id.tv_method_filter,
+                categoryList
+            )
+            tvCategory.setAdapter(categoryAdapter)
+            tvCategory.setOnItemClickListener { _, _, position, _ ->
+                currentCategory = categoryList[position]
+                mainViewModel.getBreakingNews(countryCode = countryCode, currentCategory)
+                dialog.dismiss()
+            }
+
+            val cvReset = bottomSheetBinding.cvResetFilters
+
+            cvReset.setOnClickListener {
+                countryCode = "us"
+                currentCategory = null
+                mainViewModel.getBreakingNews(countryCode = countryCode, currentCategory)
+                dialog.dismiss()
+            }
+
             dialog.setContentView(bottomSheetBinding.root)
             dialog.show()
         }
@@ -93,7 +123,7 @@ class BreakingNewsFragment : Fragment() {
         val cvViewMore = binding.cvViewMore
 
         cvViewMore.setOnClickListener {
-            mainViewModel.getBreakingNews(countryCode)
+            mainViewModel.getBreakingNews(countryCode, currentCategory)
         }
 
 

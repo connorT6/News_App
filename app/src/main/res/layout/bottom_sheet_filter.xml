@@ -46,6 +46,33 @@
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_reset_filters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/corner_radius"
+            android:backgroundTint="@color/primary_color"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="10dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="@id/tl_category"
+            app:layout_constraintTop_toBottomOf="@id/tl_category">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Reset"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -40,7 +40,7 @@
         android:foreground="?attr/selectableItemBackground"
         app:cardCornerRadius="@dimen/corner_radius"
         app:strokeWidth="3dp"
-        app:strokeColor="@color/purple_500"
+        app:strokeColor="@color/secondary_color"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:text="View More"
             android:layout_margin="10dp"
-            android:textColor="@color/purple_500"
+            android:textColor="@color/secondary_color"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_gravity="center"/>
