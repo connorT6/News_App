@@ -4,6 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AND/NewsApp/app/src/main/res/layout/activity_main.xml" value="0.19895833333333332" />
+        <entry key="..\:/AND/NewsApp/app/src/main/res/layout/fragment_breaking_news.xml" value="0.21458333333333332" />
+        <entry key="..\:/AND/NewsApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.21458333333333332" />
+        <entry key="..\:/AND/NewsApp/app/src/main/res/layout/fragment_search.xml" value="0.18704710144927536" />
+        <entry key="..\:/AND/NewsApp/app/src/main/res/layout/fragment_top_news.xml" value="0.18704710144927536" />
+        <entry key="..\:/AND/NewsApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.21354166666666666" />
       </map>
     </option>
   </component>
