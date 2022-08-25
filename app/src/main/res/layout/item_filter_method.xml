@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/corner_radius"
+    app:strokeColor="@color/black"
+    app:strokeWidth="2dp">
+
+    <TextView
+        android:id="@+id/tv_method_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:padding="5dp"/>
+
+</com.google.android.material.card.MaterialCardView>

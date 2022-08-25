@@ -9,15 +9,36 @@
         android:id="@+id/searchFragment"
         android:name="com.connort6.newsapp.ui.fragments.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/breakingNewsFragment"
         android:name="com.connort6.newsapp.ui.fragments.BreakingNewsFragment"
         android:label="fragment_breaking_news"
-        tools:layout="@layout/fragment_breaking_news" />
+        tools:layout="@layout/fragment_breaking_news" >
+        <action
+            android:id="@+id/action_breakingNewsFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/topNewsFragment"
         android:name="com.connort6.newsapp.ui.fragments.TopNewsFragment"
         android:label="fragment_top_news"
-        tools:layout="@layout/fragment_top_news" />
+        tools:layout="@layout/fragment_top_news" >
+        <action
+            android:id="@+id/action_topNewsFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.connort6.newsapp.ui.fragments.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article" >
+        <argument
+            android:name="article"
+            app:argType="com.connort6.newsapp.data.Article" />
+    </fragment>
 </navigation>

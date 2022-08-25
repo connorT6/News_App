@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="corner_radius">25dp</dimen>\
+    <dimen name="corner_radius">25dp</dimen>
+    <dimen name="minus_corner_radius">-25dp</dimen>
     <dimen name="br_news_margin">20dp</dimen>
 </resources>

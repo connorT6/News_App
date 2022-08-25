@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.connort6.newsapp.R
 import com.connort6.newsapp.databinding.ActivityMainBinding
+import com.connort6.newsapp.other.Constants
 import com.connort6.newsapp.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(binding.fragmentContainerMain.id) as NavHostFragment
         binding.bottomNaviView.setupWithNavController(navHostFragment.findNavController())
 
+        Constants.initializeData()
 
     }
 }

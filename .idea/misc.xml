@@ -5,11 +5,15 @@
       <map>
         <entry key="..\:/AND/NewsApp/app/src/main/res/drawable/bottom_nav_selector.xml" value="0.1" />
         <entry key="..\:/AND/NewsApp/app/src/main/res/layout/activity_main.xml" value="0.19895833333333332" />
+        <entry key="..\:/AND/NewsApp/app/src/main/res/layout/bottom_sheet_filter.xml" value="0.4954954954954955" />
+        <entry key="..\:/AND/NewsApp/app/src/main/res/layout/fragment_article.xml" value="0.1" />
         <entry key="..\:/AND/NewsApp/app/src/main/res/layout/fragment_breaking_news.xml" value="0.21458333333333332" />
         <entry key="..\:/AND/NewsApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.21458333333333332" />
+        <entry key="..\:/AND/NewsApp/app/src/main/res/layout/fragment_filter.xml" value="0.13802083333333334" />
         <entry key="..\:/AND/NewsApp/app/src/main/res/layout/fragment_search.xml" value="0.18704710144927536" />
         <entry key="..\:/AND/NewsApp/app/src/main/res/layout/fragment_top_news.xml" value="0.18704710144927536" />
         <entry key="..\:/AND/NewsApp/app/src/main/res/layout/item_breaking_news.xml" value="0.28502415458937197" />
+        <entry key="..\:/AND/NewsApp/app/src/main/res/layout/item_filter_method.xml" value="0.21458333333333332" />
         <entry key="..\:/AND/NewsApp/app/src/main/res/layout/item_view_more_rec_view.xml" value="0.21354166666666666" />
         <entry key="..\:/AND/NewsApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.21354166666666666" />
       </map>

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.connort6.newsapp.data.News
+import com.connort6.newsapp.other.Constants
 import com.connort6.newsapp.other.ResponseWrapper
 import com.connort6.newsapp.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,7 @@ class MainViewModel @Inject constructor(
 
     var breakingNewsML: MutableLiveData<ResponseWrapper> = MutableLiveData()
     private var breakingNewsPage = 1
+    private var prevBreakingNewsCountry = "us"
     private var breakingNews: ResponseWrapper? = null
 
     val searchNewsML: MutableLiveData<ResponseWrapper> = MutableLiveData()
@@ -26,25 +28,43 @@ class MainViewModel @Inject constructor(
 
     init {
         getBreakingNews()
+        viewModelScope.launch {
+            //Constants.addDetailsToMap()
+        }
     }
 
     fun getBreakingNews(countryCode: String = "us") {
+        if (prevBreakingNewsCountry != countryCode){
+            breakingNewsPage = 1
+            breakingNews = null
+            prevBreakingNewsCountry = countryCode
+        }
         viewModelScope.launch {
             breakingNewsML.postValue(ResponseWrapper())
-            val res = mainRepository.getBreakingNews(countryCode, breakingNewsPage)
-            val data = processResponse(res, breakingNews)
-            breakingNews = data
-            breakingNewsML.postValue(data)
+            try {
+                val res = mainRepository.getBreakingNews(countryCode, breakingNewsPage)
+                val data = processResponse(res, breakingNews)
+                breakingNews = data
+                breakingNewsML.postValue(data)
+            }catch (t: Throwable){
+
+            }
+
         }
     }
 
     fun searchNews(keyword: String) {
         viewModelScope.launch {
             searchNewsML.postValue(ResponseWrapper())
-            val res = mainRepository.searchNews(keyword)
-            val data = processResponse(res, topNews)
-            topNews = data
-            searchNewsML.postValue(data)
+            try {
+                val res = mainRepository.searchNews(keyword)
+                val data = processResponse(res, topNews)
+                topNews = data
+                searchNewsML.postValue(data)
+            }catch (t:Throwable){
+
+            }
+
         }
     }
 
