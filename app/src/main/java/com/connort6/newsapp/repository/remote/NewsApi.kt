@@ -21,8 +21,9 @@ interface NewsApi {
     // This endpoint does not support filter by country and category
     @GET("v2/everything")
     suspend fun searchAllNews(
-        @Query("apiKey") apiKey: String = API_KEY,
         @Query("q") keyword: String = "keyword",
-        @Query("language") language: String? = "en"
+        @Query("language") language: String? = "en",
+        @Query("page") pageNo:Int = 1,
+        @Query("apiKey") apiKey: String = API_KEY
     ): Response<News>
 }

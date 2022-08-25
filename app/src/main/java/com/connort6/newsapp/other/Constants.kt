@@ -2,12 +2,15 @@ package com.connort6.newsapp.other
 
 class Constants {
     companion object {
-        const val API_KEY = "1957e2e6764c4db88ac5c9dd5f2e1a4e"
+        const val API_KEY = "63b02b0976e043d59c719ea7f52dcb3e"
         val countryMap: HashMap<String, String> = HashMap()
         val categoryList: ArrayList<String> = ArrayList()
+        val languageMap: HashMap<String, String> = HashMap()
+
         fun initializeData() {
             addDetailsToMap()
             addCategoriesToList()
+            addToLanguageMap()
         }
 
         private fun addDetailsToMap() {
@@ -42,6 +45,22 @@ class Constants {
             categoryList.add("science")
             categoryList.add("sports")
             categoryList.add("technology")
+        }
+
+        private fun addToLanguageMap() {
+            languageMap["Arabic"] = "ar"
+            languageMap["German"] = "de"
+            languageMap["English"] = "en"
+            languageMap["Spanish"] = "es"
+            languageMap["French"] = "fr"
+            languageMap["Hebrew"] = "he"
+            languageMap["Italian"] = "it"
+            languageMap["Dutch"] = "nl"
+            languageMap["Norwegian"] = "no"
+            languageMap["Portuguese"] = "pt"
+            languageMap["Russian"] = "ru"
+            languageMap["Swedish"] = "sv"
+            languageMap["Chinese"] = "zh"
         }
     }
 

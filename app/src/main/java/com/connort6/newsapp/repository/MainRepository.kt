@@ -11,8 +11,8 @@ class MainRepository(
     suspend fun getBreakingNews(countryCode: String, pageNumber: Int, category: String? = null) =
         newsApi.getBreakingNews(countryCode = countryCode, pageNo = pageNumber, category = category)
 
-    suspend fun searchNews(keyword: String) =
-        newsApi.searchAllNews(keyword = keyword)
+    suspend fun searchNews(keyword: String, language: String, pageNumber: Int) =
+        newsApi.searchAllNews(keyword = keyword, language, pageNumber)
 
     // cannot apply with the given given endpoint due to limitations
     //suspend fun getTopNews(language: String) = newsApi.searchAllNews(language = language)

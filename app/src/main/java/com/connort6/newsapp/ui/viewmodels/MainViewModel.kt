@@ -23,8 +23,13 @@ class MainViewModel @Inject constructor(
     private var breakingNewsCat: String? = null
 
     val searchNewsML: MutableLiveData<ResponseWrapper> = MutableLiveData()
+    private var searchedNews: ResponseWrapper? = null
+    private var oldKeyword: String? = null
+    private var searchNewsPage = 1
+    private var previousLang: String = "en"
+
     val topNewsML: MutableLiveData<ResponseWrapper> = MutableLiveData()
-    private var topNews: ResponseWrapper? = null
+    //private var topNews: ResponseWrapper? = null
 
     init {
         getBreakingNews()
@@ -39,7 +44,7 @@ class MainViewModel @Inject constructor(
             breakingNews = null
             prevBreakingNewsCountry = countryCode
         }
-        if (breakingNewsCat != category){
+        if (breakingNewsCat != category) {
             breakingNewsPage = 1
             breakingNews = null
             breakingNewsCat = category
@@ -59,19 +64,35 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun searchNews(keyword: String) {
+    fun searchNews(keyword: String, language: String = "en") {
+        if (keyword != oldKeyword) {
+            searchedNews = null
+            searchNewsPage = 1
+            oldKeyword = keyword
+        }
+        if (previousLang != language){
+            searchedNews = null
+            searchNewsPage = 1
+            previousLang = language
+        }
+
         viewModelScope.launch {
             searchNewsML.postValue(ResponseWrapper())
             try {
-                val res = mainRepository.searchNews(keyword)
-                val data = processResponse(res, topNews)
-                topNews = data
+                val res = mainRepository.searchNews(keyword, language, searchNewsPage)
+                val data = processResponse(res, searchedNews)
+                searchedNews = data
                 searchNewsML.postValue(data)
             } catch (t: Throwable) {
 
             }
 
         }
+    }
+
+    fun getNextPageSearch() {
+        searchNewsPage++
+        oldKeyword?.let { searchNews(it, previousLang) }
     }
 
     private fun processResponse(
