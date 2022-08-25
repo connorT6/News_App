@@ -13,7 +13,8 @@ interface NewsApi {
     suspend fun getBreakingNews(
         @Query("country") countryCode: String? = null,
         @Query("category") category: String? = null,
-        @Query("apiKey") apiKey: String = API_KEY
+        @Query("apiKey") apiKey: String = API_KEY,
+        @Query("page") pageNo:Int = 1
     ): Response<News>
 
     // This method is used for both searching and top news section

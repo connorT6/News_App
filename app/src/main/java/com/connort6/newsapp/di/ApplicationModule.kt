@@ -1,5 +1,6 @@
 package com.connort6.newsapp.di
 
+import com.connort6.newsapp.adapters.NewsRecViewAdapter
 import com.connort6.newsapp.repository.MainRepository
 import com.connort6.newsapp.repository.remote.NewsApi
 import dagger.Module
@@ -30,5 +31,6 @@ object ApplicationModule {
     fun provideMainRepository(newsApi: NewsApi): MainRepository {
         return MainRepository(newsApi)
     }
+
 
 }

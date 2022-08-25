@@ -1,19 +1,15 @@
 package com.connort6.newsapp.repository
 
-import android.util.Log
 import com.connort6.newsapp.repository.remote.NewsApi
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 @OptIn(DelicateCoroutinesApi::class)
 class MainRepository(
     private val newsApi: NewsApi
 ) {
 
-    suspend fun getBreakingNews(countryCode: String) =
-        newsApi.getBreakingNews(countryCode = countryCode)
+    suspend fun getBreakingNews(countryCode: String, pageNumber: Int) =
+        newsApi.getBreakingNews(countryCode = countryCode, pageNo = pageNumber)
 
     suspend fun searchNews(keyword: String) =
         newsApi.searchAllNews(keyword = keyword)
