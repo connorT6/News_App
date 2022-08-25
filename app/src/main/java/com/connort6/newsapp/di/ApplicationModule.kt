@@ -17,7 +17,7 @@ object ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideNewsApi() : NewsApi {
+    fun provideNewsApi(): NewsApi {
         return Retrofit.Builder()
             .baseUrl("https://newsapi.org/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -27,7 +27,7 @@ object ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideMainRepository(newsApi: NewsApi) : MainRepository {
+    fun provideMainRepository(newsApi: NewsApi): MainRepository {
         return MainRepository(newsApi)
     }
 

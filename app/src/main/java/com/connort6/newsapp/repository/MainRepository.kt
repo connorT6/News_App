@@ -12,16 +12,12 @@ class MainRepository(
     private val newsApi: NewsApi
 ) {
 
-    fun call() {
-        GlobalScope.launch(Dispatchers.IO){
-            val response = newsApi.getNews()
-            Log.d("mvv", response.isSuccessful.toString())
-            if (response.isSuccessful){
-                val news = response.body()
-                if (news != null) {
-                    Log.d("mvv", news.status)
-                }
-            }
-        }
-    }
+    suspend fun getBreakingNews(countryCode: String) =
+        newsApi.getBreakingNews(countryCode = countryCode)
+
+    suspend fun searchNews(keyword: String) =
+        newsApi.searchAllNews(keyword = keyword)
+
+    // cannot apply with the given given endpoint due to limitations
+    //suspend fun getTopNews(language: String) = newsApi.searchAllNews(language = language)
 }

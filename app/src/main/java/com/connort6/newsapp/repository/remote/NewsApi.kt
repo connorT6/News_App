@@ -9,17 +9,11 @@ import com.connort6.newsapp.other.Constants.Companion.API_KEY
 
 interface NewsApi {
 
-    @GET("everything")
-    suspend fun getNews(
-        @Query("apiKey") apiKey: String = API_KEY,
-        @Query("q") keyword: String = "keyword"
-    ): Response<News>
-
     @GET("v2/top-headlines")
     suspend fun getBreakingNews(
-        @Query("apiKey") apiKey: String = API_KEY,
         @Query("country") countryCode: String? = null,
-        @Query("category") category: String? = null
+        @Query("category") category: String? = null,
+        @Query("apiKey") apiKey: String = API_KEY
     ): Response<News>
 
     // This method is used for both searching and top news section
