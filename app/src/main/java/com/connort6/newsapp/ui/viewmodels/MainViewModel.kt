@@ -19,10 +19,13 @@ class MainViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : ViewModel() {
 
-    val breakingNewsML: MutableLiveData<ResponseWrapper> = MutableLiveData()
+    var breakingNewsML: MutableLiveData<ResponseWrapper> = MutableLiveData()
     val searchNewsML: MutableLiveData<ResponseWrapper> = MutableLiveData()
     val topNewsML:MutableLiveData<ResponseWrapper> = MutableLiveData()
 
+    init {
+        getBreakingNews("us")
+    }
 
     fun getBreakingNews(countryCode: String) {
         viewModelScope.launch {
