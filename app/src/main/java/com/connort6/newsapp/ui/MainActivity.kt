@@ -1,9 +1,11 @@
 package com.connort6.newsapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -23,8 +25,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(binding.fragmentContainerMain.id) as NavHostFragment
-        binding.bottomNaviView.setupWithNavController(navHostFragment.findNavController())
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(binding.fragmentContainerMain.id) as NavHostFragment
+        val navController = navHostFragment.findNavController()
+
+        binding.bottomNaviView.visibility = View.GONE
+
+        mainViewModel.signedInML.observe(this, Observer {
+            if (it) {
+                binding.bottomNaviView.visibility = View.VISIBLE
+                binding.bottomNaviView.setupWithNavController(navController)
+                navController.navigate(R.id.action_loginFragment_to_breakingNewsFragment)
+            }
+        })
 
         Constants.initializeData()
 

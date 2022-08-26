@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_main"
-    app:startDestination="@id/breakingNewsFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/searchFragment"
@@ -40,5 +40,29 @@
         <argument
             android:name="article"
             app:argType="com.connort6.newsapp.data.Article" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.connort6.newsapp.ui.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_breakingNewsFragment"
+            app:destination="@id/breakingNewsFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.connort6.newsapp.ui.fragments.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
 </navigation>

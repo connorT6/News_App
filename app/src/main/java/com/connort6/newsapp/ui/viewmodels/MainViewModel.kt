@@ -1,7 +1,11 @@
 package com.connort6.newsapp.ui.viewmodels
 
+import android.app.Application
+import android.content.Context
+import android.os.Looper
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.connort6.newsapp.data.News
 import com.connort6.newsapp.other.ResponseWrapper
@@ -13,8 +17,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val mainRepository: MainRepository
-) : ViewModel() {
+    private val mainRepository: MainRepository,
+    application: Application,
+) : AndroidViewModel(application) {
 
     var breakingNewsML: MutableLiveData<ResponseWrapper> = MutableLiveData()
     private var breakingNewsPage = 1
@@ -28,14 +33,12 @@ class MainViewModel @Inject constructor(
     private var searchNewsPage = 1
     private var previousLang: String = "en"
 
+    val signedInML: MutableLiveData<Boolean> = MutableLiveData(false)
     val topNewsML: MutableLiveData<ResponseWrapper> = MutableLiveData()
     //private var topNews: ResponseWrapper? = null
 
     init {
         getBreakingNews()
-        viewModelScope.launch {
-            //Constants.addDetailsToMap()
-        }
     }
 
     fun getBreakingNews(countryCode: String = "us", category: String? = null) {
@@ -60,7 +63,6 @@ class MainViewModel @Inject constructor(
             } catch (t: Throwable) {
 
             }
-
         }
     }
 
@@ -70,7 +72,7 @@ class MainViewModel @Inject constructor(
             searchNewsPage = 1
             oldKeyword = keyword
         }
-        if (previousLang != language){
+        if (previousLang != language) {
             searchedNews = null
             searchNewsPage = 1
             previousLang = language
@@ -86,7 +88,6 @@ class MainViewModel @Inject constructor(
             } catch (t: Throwable) {
 
             }
-
         }
     }
 
@@ -116,4 +117,42 @@ class MainViewModel @Inject constructor(
         return ResponseWrapper(status = ResponseWrapper.ERROR, message = response.message())
     }
 
+    //just a basic authentication
+    fun checkLogin(username: String, password: String) {
+        if (getFromSharedPref(username) == password) {
+            signedInML.value = true
+        } else {
+            showToast("Wrong username or password")
+        }
+    }
+
+    fun registerUser(username: String, password: String) {
+        writeToSharedPref(username, password)
+    }
+
+    private fun getFromSharedPref(username: String): String? {
+        val sharedPref = getApplication<Application>().getSharedPreferences(
+            "users",
+            Context.MODE_PRIVATE
+        )
+        return sharedPref.getString(username, "")
+    }
+
+    private fun writeToSharedPref(username: String, password: String) {
+        val sharedPref = getApplication<Application>().getSharedPreferences(
+            "users",
+            Context.MODE_PRIVATE
+        )
+
+        val editor = sharedPref.edit()
+        editor.putString(username, password)
+        editor.apply()
+    }
+
+    private fun showToast(text: String) {
+        val runnable = Runnable {
+            Toast.makeText(getApplication(), text, Toast.LENGTH_LONG).show()
+        }
+        val handler = android.os.Handler(Looper.getMainLooper()).post(runnable)
+    }
 }

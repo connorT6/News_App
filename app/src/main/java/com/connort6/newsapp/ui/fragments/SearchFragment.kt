@@ -1,11 +1,14 @@
 package com.connort6.newsapp.ui.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -56,6 +59,21 @@ class SearchFragment : Fragment() {
             if (keyword != "") {
                 mainViewModel.searchNews(keyword, language = currentLanguage)
             }
+        }
+
+        textInput.setOnKeyListener { view, i, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                textInput.clearFocus()
+                val keyword = textInput.text.toString()
+                if (keyword != "") {
+                    mainViewModel.searchNews(keyword, language = currentLanguage)
+                }
+                val inputMethodManager: InputMethodManager =
+                    requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
         }
 
         binding.cvFilter.setOnClickListener {

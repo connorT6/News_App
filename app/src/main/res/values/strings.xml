@@ -10,4 +10,10 @@
     <string name="filter">Filter</string>
     <string name="language">Language</string>
     <string name="country">Country</string>
+    <string name="user_name">User Name</string>
+    <string name="re_enter_password">Re-Enter Password</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="signup">SignUp</string>
 </resources>
